@@ -1,0 +1,11 @@
+<project name="Serenity" basedir="." default="serenity.reports">
+
+    <target name="define.tasks">
+        <taskdef name="serenityreport" classname="net.serenitybdd.ant.SerenityReportingTask" />
+
+    </target>
+
+    <target name="serenity.reports" depends="define.tasks">
+        <serenityreport sourceDirectory="classpath:test-outcomes" outputDirectory="classpath:alt-test-outcomes"/>
+    </target>
+</project>

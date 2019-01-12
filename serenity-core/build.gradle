@@ -1,0 +1,238 @@
+import org.apache.tools.ant.filters.*
+
+ext {
+    bintrayPackage = 'serenity-core'
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": "Serenity Core",
+                "Implementation-Version": project.version.toString())
+    }
+}
+
+test {
+    maxParallelForks = Integer.parseInt(System.getProperty("forks","1"))
+}
+
+//integrationTests {
+//    beforeTest { desc, result ->
+//        println "Executing test ${desc.name} [${desc.className}]"
+//    }
+//    afterTest { desc, result ->
+//        println "Finished test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+//    }
+//}
+//
+//test {
+//    afterTest { desc, result ->
+//        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+//    }
+//}
+dependencies {
+
+    compile project(':serenity-report-resources')
+    compile project(':serenity-model')
+    compile project(':serenity-reports')
+
+    compile "com.google.code.gson:gson:${gsonVersion}"
+
+    compile "commons-codec:commons-codec:${commonsCodecVersion}"
+    compile "commons-io:commons-io:${commonsIoVersion}"
+
+//    compile("com.opera:operadriver:${operaDriverVersion}") {
+//        exclude group: 'org.seleniumhq.selenium', module: 'selenium-java'
+//        exclude group: 'org.seleniumhq.selenium', module: 'selenium-remote-driver'
+//        exclude group: 'com.google.guava', module: 'guava'
+//        exclude group: 'org.apache.commons', module: 'commons-exec'
+//    }
+
+    compile("org.seleniumhq.selenium:selenium-server:$seleniumVersion") {
+        exclude group: 'cglib', module: 'cglib-nodep'
+        exclude group: 'guava', module: 'guava'
+        exclude group: 'commons-io', module: 'commons-io'
+        exclude group: 'commons-codec', module: 'commons-codec'
+        exclude group: 'org.apache.commons', module: 'commons-lang3'
+        exclude group: 'com.google.code.gson', module: 'gson'
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'net.sourceforge.htmlunit', module: 'htmlunit'
+        exclude group: 'org.mortbay.jetty', module: 'servlet-api-2.5'
+        exclude group: 'com.codeborne', module: 'phantomjsdriver'
+        exclude group: "org.eclipse.jetty", module:"jetty-util"
+        exclude group: "org.eclipse.jetty", module:"jetty-io"
+        exclude group: "commons-codec", module:"commons-codec"
+        exclude group: "org.seleniumhq.selenium", module:"htmlunit-driver"
+        exclude group: "net.sourceforge.htmlunit", module:"neko-htmlunit"
+        exclude group: "net.sourceforge.htmlunit", module:"htmlunit-core"
+        exclude group: "net.sourceforge.htmlunit", module:"htmlunit-core-js"
+        exclude group: "net.sourceforge.htmlunit", module:"htmlunit-cssparser"
+    }
+
+    compile("org.seleniumhq.selenium:selenium-java:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-api:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-chrome-driver:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-edge-driver:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-remote-driver:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-safari-driver:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-opera-driver:$seleniumVersion")
+    compile("org.seleniumhq.selenium:selenium-support:$seleniumVersion")
+
+    compile("com.paulhammant:ngwebdriver:${ngwebdriver}")
+
+    compile("com.codeborne:phantomjsdriver:${phantomjsDriverVersion}") {
+        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: "commons-codec", module:"commons-codec"
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-api'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-remote-driver'
+    }
+
+    compile "commons-codec:commons-codec:${commonsCodecVersion}"
+    compile "org.eclipse.jetty:jetty-util:${jettyVersion}"
+    compile "org.eclipse.jetty:jetty-io:${jettyVersion}"
+
+
+    compile("org.seleniumhq.selenium:htmlunit-driver:${htmlunitDriverVersion}") {
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-java'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-server'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-remote-driver'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-api'
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-support'
+        exclude group: 'commons-codec', module: 'commons-codec'
+        exclude group: 'commons-text', module: 'commons-text'
+//        exclude group: 'org.apache.httpcomponents', module: 'httpmimet'
+//        exclude group: 'net.sourceforge.htmlunit', module: 'htmlunit'
+    }
+
+    compile("io.appium:java-client:${appiumJavaClientVersion}") {
+        exclude group: 'org.seleniumhq.selenium'
+        exclude group: 'cglib', module: 'cglib'
+        exclude group: 'junit', module: 'junit'
+        exclude group: 'com.google.guava', module: 'guava'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'com.google.code.gson', module: 'gson'
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'commons-io', module: 'commons-io'
+        exclude group: 'org.apache.commons', module: 'commons-lang3'
+        exclude group: 'org.glassfish.tyrus', module: 'tyrus-core'
+    }
+    compile "org.glassfish.tyrus:tyrus-core:1.13.1"
+
+    compile "org.codehaus.groovy:groovy:${groovyVersion}"
+
+    compile "net.sf.opencsv:opencsv:${openCsvVersion}"
+    compile("commons-beanutils:commons-beanutils-core:${beanUtilsVersion}") {
+        exclude group: 'commons-logging', module: 'commons-logging'
+    }
+
+    compile "joda-time:joda-time:${jodaTimeVersion}"
+    compile "com.thoughtworks.xstream:xstream:${xstreamVersion}"
+    compile "org.apache.commons:commons-lang3:${commonsLang3Version}"
+    compile "commons-collections:commons-collections:${commonsCollectionsVersion}"
+    compile "org.freemarker:freemarker:${freemarkerVersion}"
+    compile("net.sourceforge.jexcelapi:jxl:${jexcelapiVersion}") {
+        exclude group: 'log4j', module: 'log4j'
+    }
+    compile "org.hamcrest:hamcrest-core:${hamcrestVersion}"
+    compile "org.hamcrest:hamcrest-library:${hamcrestVersion}"
+    compile("net.sourceforge.htmlunit:htmlunit:${htmlunitVersion}") {
+        exclude group: 'org.apache.commons', module: 'commons-lang3'
+        exclude group: 'commons-logging', module: 'commons-logging'
+        exclude group: 'commons-io', module: 'commons-io'
+        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: 'xalan', module: 'xalan'
+        exclude group: 'commons-codec', module: 'commons-codec'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'org.apache.httpcomponents', module: 'httpmime'
+    }
+    compile("org.apache.httpcomponents:httpclient:${httpclientVersion}") {
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+    compile("org.apache.httpcomponents:httpmime:${httpclientVersion}") {
+        exclude group: 'commons-codec', module: 'commons-codec'
+    }
+
+    compile("org.fluentlenium:fluentlenium-core:${fluentleniumVersion}") {
+        exclude group: 'org.seleniumhq.selenium', module: 'selenium-java'
+        exclude group: 'junit', module: 'junit-dep'
+    }
+    compile "com.jhlabs:filters:${jhlabfiltersVersion}"
+
+    compile("org.asciidoctor:asciidoctorj:${asciidoctorVersion}"){
+        exclude group: 'com.beust', module: 'jcommander'
+    }
+
+    compile "org.imgscalr:imgscalr-lib:${imgscalrVersion}"
+
+    compile "javax.el:javax.el-api:${elApiVersion}"
+    compile "org.glassfish.web:javax.el:${elApiVersion}"
+
+    compile("xalan:xalan:${xalanVersion}") {
+        exclude group: 'xalan', module: 'serializer'
+    }
+    compile("xalan:serializer:${xalanVersion}") {
+        exclude group: 'xml-apis', module: 'xml-apis'
+    }
+
+
+//    compile("com.jayway.awaitility:awaitility:${awaitilityVersion}") {
+    compile("org.awaitility:awaitility:${awaitilityVersion}") {
+        exclude group: 'cglib', module: 'cglib-nodep'
+        exclude group: 'org.objenesis', module: 'objenesis'
+    }
+    compile "com.typesafe:config:${typesafeConfigVersion}"
+    compile("org.jsoup:jsoup:${jsoupVersion}") {
+        exclude group: 'junit', module: 'junit'
+    }
+    compile("com.google.jimfs:jimfs:${jimfsVersion}") {
+        exclude group: 'com.google.guava', module: 'guava'
+    }
+    compile 'es.nitaur.markdown:txtmark:0.16'
+    //compile 'org.commonjava.googlecode.markdown4j:markdown4j:2.2-cj-1.1'
+
+    compile ("com.vladsch.flexmark:flexmark-all:0.34.30") {
+        exclude group:"org.jsoup", module:"jsoup"
+    }
+
+
+    testCompile "junit:junit:${junitVersion}"
+    testCompile "org.springframework:spring-test:${springVersion}"
+    testCompile "org.springframework:spring-context:${springVersion}"
+    testCompile "org.springframework:spring-context-support:${springVersion}"
+
+
+    testCompile project(':serenity-sample-alternative-resources')
+    testCompile project(':serenity-test-utils')
+    testCompile project(':serenity-model')
+    testCompile project(':serenity-reports')
+    testCompile "org.skyscreamer:jsonassert:${jsonassertVersion}"
+    testCompile("org.jbehave:jbehave:${jbehaveVersion}") {
+        exclude module: 'freemarker'
+        exclude module: 'junit'
+        exclude module: 'xstream'
+    }
+}
+
+processResources {
+    println "PROJECT = " + project.version
+    filter ReplaceTokens, tokens: [
+            "application.version": "" + project.version
+    ]
+}
+
+task writeNewPom {
+    doLast {
+        pom {
+            project {
+                inceptionYear '2011'
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+            }
+        }.writeTo("pom.xml")
+    }
+}

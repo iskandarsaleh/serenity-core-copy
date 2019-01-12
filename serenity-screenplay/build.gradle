@@ -1,0 +1,10 @@
+ext {
+    bintrayPackage = 'serenity-screenplay'
+    projectDescription = 'Support for the User Journey pattern in Serenity'
+}
+
+dependencies {
+    compile 'uk.com.robust-it:cloning:1.9.10'
+    compile project(':serenity-core')
+    testCompile project(':serenity-junit')
+}

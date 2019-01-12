@@ -1,0 +1,28 @@
+ext {
+    bintrayPackage = 'serenity-rest-assured'
+    projectDescription = 'Serenity RestAssured integration'
+}
+
+dependencies {
+    compile project(':serenity-core')
+    compile ("io.rest-assured:rest-assured:${restAssuredVersion}") {
+        //exclude group: 'io.rest-assured', module:'json-path'
+        //exclude group: 'io.rest-assured', module:'xml-path'
+        exclude group: 'org.apache.httpcomponents', module:'httpclient'
+        exclude group: 'org.apache.httpcomponents', module:'httpmime'
+        exclude group: 'org.codehaus.groovy', module:'groovy'
+        exclude group: 'org.codehaus.groovy', module:'groovy-json'
+        exclude group: 'org.codehaus.groovy', module:'groovy-xml'
+        exclude group: 'org.apache.commons', module:'commons-lang3'
+    }
+    compile "org.codehaus.groovy:groovy:${groovyVersion}"
+    compile "org.codehaus.groovy:groovy-xml:${groovyVersion}"
+    compile "org.codehaus.groovy:groovy-json:${groovyVersion}"
+
+    testCompile ("com.github.tomakehurst:wiremock:$wiremockCoreVersion") {
+        exclude group: 'com.google.guava', module:'guava'
+        exclude group: 'org.apache.httpcomponents', module:'httpclient'
+        exclude group: 'org.slf4j', module: 'slf4j-api'
+    }
+    testCompile project(':serenity-test-utils')
+}

@@ -1,0 +1,10 @@
+ext {
+    bintrayPackage = 'serenity-screenplay-webdriver'
+    projectDescription = 'Webdriver integration for the User Journey pattern in Serenity'
+}
+
+dependencies {
+    compile project(':serenity-core')
+    compile project(':serenity-screenplay')
+    testCompile project(':serenity-junit')
+}
